@@ -1,0 +1,13 @@
+[project]
+name = "foms-analytics"
+version = "1.0.0"
+description = "Predictive Analytics Service for FOMS"
+dependencies = [
+  "flask",
+  "pandas",
+  "scikit-learn==1.6.1"
+]
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"
