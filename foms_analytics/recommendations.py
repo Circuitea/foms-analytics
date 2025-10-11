@@ -38,30 +38,20 @@ def make(model_ident):
   output = []
   predictions = {}
   data = {
-    'year': request.json['year'],
     'month': request.json['month'],
-    'quarter': request.json['quarter'],
-    'quantity': request.json['quantities'], # array of 6
+    'quantity': request.json['quantities'], # array of 3
   }
 
   X = pd.DataFrame([{
-    'Time_Index': 0,
-    'Month': data['month'],
-    'Quarter': data['quarter'],
-    'Year': data['year'],
+    'Time_Index': 1,
 
     'Month_Sin': math.sin(2 * np.pi * data['month'] / 12),
     'Month_Cos': math.cos(2 * np.pi * data['month'] / 12),
-    'Quarter_Sin': math.sin(2 * np.pi * data['quarter'] / 4),
-    'Quarter_Cos': math.cos(2 * np.pi * data['quarter'] / 4),
 
     'Lag_1': data['quantity'][1],
     'Lag_2': data['quantity'][2],
-    'Lag_3': data['quantity'][3],
 
-    'Rolling_Mean_3': np.mean(data['quantity'][:3]),
-    'Rolling_Mean_6': np.mean(data['quantity'][:6]),
-    'Rolling_Std_3': np.std(data['quantity'][:3]),
+    'Rolling_Avg_3': np.mean(data['quantity'][:3]),
   }])
 
   try:
@@ -78,5 +68,5 @@ def make(model_ident):
     'model_ident': model_ident,
     'X': X.to_dict(),
     'X_scaled': X_scaled.tolist(),
-    'predictions': predictions.tolist(),
+    'predictions': np.abs(predictions).tolist(),
   }
