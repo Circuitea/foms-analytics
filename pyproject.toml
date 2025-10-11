@@ -1,6 +1,6 @@
 [project]
 name = "foms-analytics"
-version = "1.0.0"
+version = "2.0.0"
 description = "Predictive Analytics Service for FOMS"
 dependencies = [
   "flask",
